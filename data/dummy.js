@@ -1,29 +1,29 @@
 import {
-  MdSpaceDashboard,
-  FaUsers,
-  BiMailSend,
-  BiBarChartSquare,
+  IoAppsOutline,
+  IoMailOpenOutline,
   IoSettingsOutline,
-} from "react-icons/";
+} from "react-icons/io5";
+import { AiOutlineBarChart } from "react-icons/ai";
+import { HiOutlineUserGroup } from "react-icons/hi";
 export const links = [
   {
     label: "Dashboard",
-    icon: <MdSpaceDashboard />,
+    icon: <IoAppsOutline />,
     path: "/",
   },
   {
     label: "Users",
-    icon: <FaUsers />,
+    icon: <HiOutlineUserGroup />,
     path: "/users",
   },
   {
     label: "Mails",
-    icon: <BiMailSend />,
+    icon: <IoMailOpenOutline />,
     path: "/mails",
   },
   {
     label: "Progress",
-    icon: <BiBarChartSquare />,
+    icon: <AiOutlineBarChart />,
     path: "/progress",
   },
   {
