@@ -2,16 +2,14 @@ import React, { useState, useEffect } from "react";
 import { FcBullish } from "react-icons/fc";
 import { links } from "../data/dummy";
 import { useRouter } from "next/router";
-import Switch, { SwitchProps } from "@mui/material/Switch";
+import Switch from "@mui/material/Switch";
+import Divider from "@mui/material/Divider";
 import { GiAerialSignal } from "react-icons/gi";
 import { styled } from "@mui/material/styles";
+import Link from "next/link";
 const Sidebar = () => {
-  const [checked, setChecked] = React.useState(true);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(false);
   const router = useRouter();
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
   const activeLink =
     "flex flex-row items-center gap-2 px-2 m-1 p-2 rounded-sm bg-sky-500 cursor-pointer font-medium";
   const normalLink =
@@ -64,28 +62,28 @@ const Sidebar = () => {
       borderRadius: 20 / 2,
     },
   }));
-  useEffect(() => {
-    // Update network status
-    const handleStatusChange = () => {
-      setIsOnline(navigator.onLine);
-    };
+  // useEffect(() => {
+  //   // Update network status
+  //   const handleStatusChange = () => {
+  //     setIsOnline(navigator.onLine);
+  //   };
 
-    // Listen to the online status
-    window.addEventListener("online", handleStatusChange);
+  //   // Listen to the online status
+  //   window.addEventListener("online", handleStatusChange);
 
-    // Listen to the offline status
-    window.addEventListener("offline", handleStatusChange);
+  //   // Listen to the offline status
+  //   window.addEventListener("offline", handleStatusChange);
 
-    // Specify how to clean up after this effect for performance improvment
-    return () => {
-      window.removeEventListener("online", handleStatusChange);
-      window.removeEventListener("offline", handleStatusChange);
-    };
-  }, [isOnline]);
+  //   // Specify how to clean up after this effect for performance improvment
+  //   return () => {
+  //     window.removeEventListener("online", handleStatusChange);
+  //     window.removeEventListener("offline", handleStatusChange);
+  //   };
+  // }, [isOnline]);
   return (
     <div
       className="flex flex-col h-screen 
-    w-60 bg-white shadow-2xl border-x-white divide-y-2"
+    w-60 bg-white shadow-2xl border-x-white"
     >
       <div className="flex items-center mx-4 my-3">
         <FcBullish className="w-10 h-10" />
@@ -94,17 +92,19 @@ const Sidebar = () => {
       <div className="links flex flex-col pb-24 mt-7">
         {links.map((item, index) => (
           <div
+            key={index}
             className={
               router.pathname === `${item.path}` ? activeLink : normalLink
             }
-            key={index}
-            onClick={() => router.push(`${item.path}`)}
           >
             {item.icon}
-            <span className="font-medium">{item.label}</span>
+            <Link href={item.path} legacyBehavior>
+              <a>{item.label}</a>
+            </Link>
           </div>
         ))}
       </div>
+      <Divider />
       <div className="footer flex flex-col mx-2 items-center">
         <h4 className="font-bold tracking-normal text-gray-300">Site Info</h4>
         <div className="flex gap-3 mt-3 pb-3">
